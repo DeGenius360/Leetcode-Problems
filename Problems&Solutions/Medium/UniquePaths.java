@@ -27,18 +27,23 @@ Constraints:
 
 public class UniquePaths {
     public int uniquePaths(int m, int n) {
+        // initialize dp array
         int[][] dp = new int[m][n];
         for(int i=0;i<n;i++){
+            // there is only one way to reach any cell in the first row
             dp[0][i]=1;
         }
+        // there is only one way to reach any cell in the first column
         for(int i=0;i<m;i++){
             dp[i][0]=1;
         }
+        // for any other cell, the number of ways to reach it is the sum of the number of ways to reach the cell to the left and the cell above it
         for(int i=1;i<m;i++){
             for(int j=1;j<n;j++){
                 dp[i][j]=dp[i][j-1]+dp[i-1][j];
             }
         }
+        // return the number of ways to reach the bottom right cell
         return dp[m-1][n-1];
     }
 }
